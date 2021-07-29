@@ -1,0 +1,16 @@
+ 1035  cd ..
+ 1036  cd -
+ 1037  git rev-list HEAD -- package.json -n 1
+ 1038  vi package.json
+ 1039  l
+ 1040  git restore
+ 1041  git restore package.json
+ 1042  vi package.json
+ 1043  vi package.json
+ 1044  grep version package.json
+ 1045  grep versions package.json
+ 1046  vi package.json
+ 1047  nvm install 14.16
+ 1048  sh ./setup.sh
+ 1049  yarn run:prod
+ 1050  yarn start:prod
