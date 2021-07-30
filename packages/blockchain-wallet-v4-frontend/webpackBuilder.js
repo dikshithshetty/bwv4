@@ -215,14 +215,14 @@ const buildDevServerConfig = (
   isSslEnabled,
   useHMR
 ) => {
-  const localhostUrl = isSslEnabled ? 'https://localhost:8080' : 'http://localhost:8080'
+  const 0.0.0.0Url = isSslEnabled ? 'https://0.0.0.0:8080' : 'http://0.0.0.0:8080'
 
   return {
     cert: isSslEnabled ? fs.readFileSync(CONFIG_PATH.sslConfig + '/cert.pem', 'utf8') : '',
     contentBase: CONFIG_PATH.src,
     disableHostCheck: true,
     historyApiFallback: true,
-    host: 'localhost',
+    host: '0.0.0.0',
     hot: useHMR,
     https: isSslEnabled,
     key: isSslEnabled ? fs.readFileSync(CONFIG_PATH.sslConfig + '/key.pem', 'utf8') : '',
@@ -238,7 +238,7 @@ const buildDevServerConfig = (
           everypay: envConfig.EVERYPAY_URL,
           exchange: envConfig.EXCHANGE_URL,
           horizon: envConfig.HORIZON_URL,
-          ledger: localhostUrl + '/ledger', // will trigger reverse proxy
+          ledger: 0.0.0.0Url + '/ledger', // will trigger reverse proxy
           ledgerSocket: envConfig.LEDGER_SOCKET_URL,
           root: envConfig.ROOT_URL,
           veriff: envConfig.VERIFF_URL,
@@ -252,7 +252,7 @@ const buildDevServerConfig = (
 
       app.get('/wallet-options.json', function (req, res) {
         mockWalletOptions.domains = {
-          comWalletApp: localhostUrl
+          comWalletApp: 0.0.0.0Url
         }
         res.json(mockWalletOptions)
       })
@@ -276,14 +276,14 @@ const buildDevServerConfig = (
         allowUnsafeStyles
           ? `style-src 'self' 'unsafe-inline'`
           : `style-src 'nonce-${CSP_NONCE}' 'self'`,
-        `frame-src ${envConfig.WALLET_HELPER_DOMAIN} ${envConfig.ROOT_URL} https://magic.veriff.me https://www.google.com/ https://www.gstatic.com https://localhost:8080 http://localhost:8080 http://localhost:8081`,
+        `frame-src ${envConfig.WALLET_HELPER_DOMAIN} ${envConfig.ROOT_URL} https://magic.veriff.me https://www.google.com/ https://www.gstatic.com https://0.0.0.0:8080 http://0.0.0.0:8080 http://0.0.0.0:8081`,
         `child-src ${envConfig.WALLET_HELPER_DOMAIN} blob:`,
         [
           'connect-src',
           "'self'",
           'data:',
-          'ws://localhost:8080',
-          'wss://localhost:8080',
+          'ws://0.0.0.0:8080',
+          'wss://0.0.0.0:8080',
           'wss://api.ledgerwallet.com',
           envConfig.API_DOMAIN,
           envConfig.EVERYPAY_URL,
