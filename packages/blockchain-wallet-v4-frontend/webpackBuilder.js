@@ -215,7 +215,7 @@ const buildDevServerConfig = (
   isSslEnabled,
   useHMR
 ) => {
-  const 0.0.0.0Url = isSslEnabled ? 'https://0.0.0.0:8080' : 'http://0.0.0.0:8080'
+  const localhostUrl = isSslEnabled ? 'https://0.0.0.0:8080' : 'http://0.0.0.0:8080'
 
   return {
     cert: isSslEnabled ? fs.readFileSync(CONFIG_PATH.sslConfig + '/cert.pem', 'utf8') : '',
@@ -238,7 +238,7 @@ const buildDevServerConfig = (
           everypay: envConfig.EVERYPAY_URL,
           exchange: envConfig.EXCHANGE_URL,
           horizon: envConfig.HORIZON_URL,
-          ledger: 0.0.0.0Url + '/ledger', // will trigger reverse proxy
+          ledger: localhostUrl + '/ledger', // will trigger reverse proxy
           ledgerSocket: envConfig.LEDGER_SOCKET_URL,
           root: envConfig.ROOT_URL,
           veriff: envConfig.VERIFF_URL,
@@ -252,7 +252,7 @@ const buildDevServerConfig = (
 
       app.get('/wallet-options.json', function (req, res) {
         mockWalletOptions.domains = {
-          comWalletApp: 0.0.0.0Url
+          comWalletApp: localhostUrl
         }
         res.json(mockWalletOptions)
       })
