@@ -23,7 +23,7 @@
     "start:dev": "cross-env-shell NODE_ENV=development webpack-dev-server --config webpack.config.dev.js  --devtool cheap-module-source-map",
     "start:prod": "cross-env-shell DISABLE_SSL=true NODE_ENV=production webpack-dev-server --config webpack.config.dev.js --devtool cheap-module-source-map",
     "start:staging": "cross-env-shell NODE_ENV=staging webpack-dev-server --config webpack.config.dev.js --devtool cheap-module-source-map",
-    "start": "npm start",
+    "start": "cross-env-shell DISABLE_SSL=true NODE_ENV=production webpack-dev-server --config webpack.config.dev.js --devtool cheap-module-source-map",
     "test": "cross-env npx jest",
     "test:build": "echo 'No precomplilation required for tests to execute.'",
     "test:debug": "cross-env npx --inspect-brk jest --runInBand",
